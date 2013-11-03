@@ -12,6 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -24,39 +25,40 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		for(int i=0;i<10;i++){
 		//adding contents to ArrayList
 		myMainList.add("Simple ListView");
-		myMainList.add("Simple ListView with Custom Objects Data");
 		myMainList.add("Custom Array Adapter");
 		myMainList.add("Simple Cursor Adapter");
 		myMainList.add("Custom Cursor Adapter");
-
+		}
+		
 		//Fetching the ListView
 		main_activity_list_view =  (ListView)findViewById(R.id.main_activity_list_view);
-
+        
 		//defining a simple adapter
 		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, myMainList);
-		
+
 		//attaching the adapter to the listview
 		main_activity_list_view.setAdapter(adapter);
-
 		//onItemClickListner on listview
 		main_activity_list_view.setOnItemClickListener(new OnItemClickListener() {
-			
+
 			Intent intent = null;
-			
+
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				
-				//Toast.makeText(getApplicationContext(), arg3 +"", Toast.LENGTH_LONG).show();
-				
+
+				//show the count in the listview
+				Toast.makeText(getApplicationContext(), "Total count : " + main_activity_list_view.getCount() +"\n Total child count :  " + main_activity_list_view.getChildCount(), Toast.LENGTH_LONG).show();
+
 				switch(arg2){
 				case 0 :	
 					intent = new Intent(MainActivity.this, SimpleListViewActivity.class);
 					break;
 				case 1 :
-					intent = new Intent(MainActivity.this, SimpleListViewActivity.class);
+					intent = new Intent(MainActivity.this, CustomArrayListViewActivity.class);
 					break;
 				case 2 :
 					intent = new Intent(MainActivity.this, SimpleListViewActivity.class);
@@ -68,15 +70,15 @@ public class MainActivity extends Activity {
 					intent = new Intent(MainActivity.this, SimpleListViewActivity.class);
 					break;
 				}
-				
+
 				startActivity(intent);
-				
+
 				//adding and removing items from listview
 				//adapter.add("99");
- 
+
 			}
 		});
-		
+
 		main_activity_list_view.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
@@ -84,12 +86,12 @@ public class MainActivity extends Activity {
 				//removing item on long press
 				adapter.remove(myMainList.get(arg2));
 
- 				return false;
+				return false;
 			}
 		});
-		
-		
- 	}
+
+
+	}
 
 
 	@Override
@@ -99,5 +101,5 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	
+
 }
