@@ -22,6 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.trnkarthik.listviewimplementation.SimpleListViewActivity"
+            android:label="@string/title_activity_simple_list_view" >
+        </activity>
     </application>
 
 </manifest>
